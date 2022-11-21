@@ -49,7 +49,7 @@ function recovery_items() {
 
 recovery_items();
 
-btn.onclick = inputItem();
+btn.onclick = inputItem;
 window.document.onkeydown = function (e) {
     if (e.key == 'Enter') {
         inputItem();
