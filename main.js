@@ -18,12 +18,28 @@ function addItem(itemName) {
 
     deleteBtn.onclick = function (e) {
         ul_list.removeChild(newItem);
-        items.splice(items.indexOf(myItem), 1);
+        items.splice(items.indexOf(itemName), 1);
+        localStorage.setItem('items', items);
     }
 
     ul_list.appendChild(newItem);
     newItem.appendChild(deleteBtn);
 }
+
+function inputItem() {
+    if (text.value != '') {
+        let myItem = text.value;
+        text.value = '';
+        console.log(myItem);
+        items.push(myItem);
+
+        addItem(myItem);
+
+        text.focus();
+        localStorage.setItem('items', items);
+    }
+}
+
 
 function recovery_items() {
     for (let i = 0; i < items.length; i++) {
@@ -32,30 +48,6 @@ function recovery_items() {
 }
 
 recovery_items();
-
-function inputItem() {
-    if (text.value != '') {
-        let myItem = text.value;
-        text.value = '';
-        console.log(myItem);
-        items.push(myItem);
-        let newItem = document.createElement('li');
-        newItem.textContent = myItem;
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = '削除';
-
-        deleteBtn.onclick = function (e) {
-            ul_list.removeChild(newItem);
-            items.splice(items.indexOf(myItem), 1);
-        }
-
-        ul_list.appendChild(newItem);
-        newItem.appendChild(deleteBtn);
-
-        text.focus();
-        localStorage.setItem('items', items);
-    }
-}
 
 btn.onclick = inputItem();
 window.document.onkeydown = function (e) {
